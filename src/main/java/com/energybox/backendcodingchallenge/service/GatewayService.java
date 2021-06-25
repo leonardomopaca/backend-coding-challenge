@@ -7,6 +7,7 @@ import com.energybox.backendcodingchallenge.repository.SensorRepository;
 import org.neo4j.annotations.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,9 +31,9 @@ public class GatewayService {
     public Gateway deleteGateway(Long id){
         Optional<Gateway> gateway = gatewayRepository.findById(id);
         gatewayRepository.deleteById(id);
-        Optional<Iterable<Sensor>> sensors = sensorRepository.getSensorByGateway(gateway.get());
+        List<Optional<Sensor>> sensors = sensorRepository.getSensorByGateway(gateway.get());
         //TODO LOOP TO DELETE OR UPDATE EACH SENSOR RELATED TO THE GATEWAY
-        //sensors.stream().forEach(sensor -> {sensorRepository.deleteById(sensor.g);});
+        sensors.stream().forEach(sensor -> {sensorRepository.deleteById(sensor.ge9);});
 
         return gateway.get();
 
